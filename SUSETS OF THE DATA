@@ -1,0 +1,12 @@
+# Creating a Data Frame 
+df<-data.frame(flight_dataset) 
+print ("Original Data Frame") 
+print (df) 
+
+# Creating a Subset 
+df1<-subset(df) 
+print("Modified Data Frame") 
+print(df1) 
+
+#summary of the subset
+summary(flight_dataset)
