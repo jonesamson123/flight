@@ -1,0 +1,43 @@
+library(readr)
+library(dplyr)
+library(ggplot2)
+str(flight_dataset)
+head(flight_dataset)
+summary(flight_dataset)
+
+head(flight_dataset)
+
+# Check for missing values
+colSums(is.na(flight_dataset))
+
+# Check for missing values
+missing_values <- sapply(flight_dataset, function(x) sum(is.na(x)))
+missing_values
+
+# Visualize the distribution of each numeric variable
+numeric_vars <- sapply(flight_dataset, is.numeric)
+flight_dataset.numeric<-flight_dataset[, numeric_vars]
+
+# Handle missing values (e.g., by removing rows with missing values)
+cleaned_data <- na.omit(flight_dataset)
+
+# Ensure Season is a categorical variable (replace 'Season' with the actual column name)
+flight_dataset$Airline<- as.factor(flight_dataset$Airline)
+
+# boxplot
+ggplot(flight_dataset, aes(x =Total_Stops, y =Source)) +
+  geom_boxplot(fill = "red", color = "black") +
+  theme_minimal() +
+  labs(title = "Boxplot of Humidity by Season", x= "total_stops", y= "source")
+
+  # Scatter plot to show the relationship between two numeric variables (replace 'temp' and 'humidity' with appropriate column names)
+ggplot(flight_dataset, aes(x = Source, y = Airline)) +
+  geom_point(color = "pink") +
+  theme_minimal() +
+  labs(title = "Scatter Plot of Temperature vs Humidity", x = "source", y ="airline")
+
+  # Time series plot for a variable over time (replace 'date' and 'temp' with appropriate column names)
+ggplot(flight_dataset, aes(x = Source, y = Price, group = 1)) +
+  geom_line(color = "blue") +
+  theme_minimal() +
+  labs(title = "Source and Price", x = "Source", y = "Price")
